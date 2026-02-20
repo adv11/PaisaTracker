@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="PaisaTracker" />
+    <meta name="theme-color" content="#39FF14" />
+    <meta name="description" content="Smart personal finance tracker — budgets, goals, udhaar, and much more." />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';" />
+    <title>PaisaTracker — Smart Money Manager</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="icon" type="image/png" href="./icons/icon-192.png" />
+
+    <!-- Fonts: Space Grotesk (UI) + JetBrains Mono (numbers) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/animations.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <link rel="stylesheet" href="./css/screens.css" />
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- ══════════════════════════════════════
+       SPLASH
+  ══════════════════════════════════════ -->
+        <div class="scr on" id="splash">
+            <canvas id="spc"></canvas>
+            <div id="scc">
+                <div class="splash-logo">💎</div>
+                <div class="splash-title">PaisaTracker</div>
+                <div class="splash-tagline">Smart Money Manager</div>
+                <div class="splash-bar">
+                    <div class="splash-bar-fill"></div>
+                </div>
+                <div class="splash-loading-text">Loading your finances…</div>
+            </div>
+            <div class="splash-features">
+                <div class="splash-feat-chip">🔐 Biometric Lock</div>
+                <div class="splash-feat-chip">📊 Smart Reports</div>
+                <div class="splash-feat-chip">💸 Udhaar Tracker</div>
+                <div class="splash-feat-chip">🎯 Goals</div>
+            </div>
+            <div class="splash-secure">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                </svg>
+                Data stored locally on your device
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       WELCOME
+  ══════════════════════════════════════ -->
+        <div class="scr" id="welcome">
+            <div class="sa" style="padding:0 20px 40px">
+                <div class="safe-top"></div>
+                <div class="auth-hero au">
+                    <div class="auth-logo">💎</div>
+                    <div class="auth-title">Apna Paisa,<br /><span class="text-gradient">Apna Control</span></div>
+                    <div class="auth-subtitle">Smart budgeting · expense tracking · financial goals — sab ek jagah</div>
+                </div>
+                <div class="au1" style="display:flex;flex-direction:column;gap:10px;margin-bottom:30px">
+                    <div class="feature-bullet"><span style="font-size:22px">🔐</span><span
+                            style="font-size:13px;color:var(--t2);font-weight:500">PIN + Biometric security lock</span>
+                    </div>
+                    <div class="feature-bullet"><span style="font-size:22px">📤</span><span
+                            style="font-size:13px;color:var(--t2);font-weight:500">Share udhaar details on
+                            WhatsApp/Telegram</span></div>
+                    <div class="feature-bullet"><span style="font-size:22px">📱</span><span
+                            style="font-size:13px;color:var(--t2);font-weight:500">Install on iOS &amp; Android like a
+                            real app</span></div>
+                    <div class="feature-bullet"><span style="font-size:22px">🔒</span><span
+                            style="font-size:13px;color:var(--t2);font-weight:500">Data stays private on your
+                            device</span></div>
+                </div>
+                <button class="btn btn-p au2" style="width:100%;padding:17px;font-size:16px;border-radius:18px"
+                    onclick="go('login')">Get Started →</button>
+                <p style="text-align:center;font-size:11px;color:var(--t3);margin-top:10px">No account needed · Works
+                    offline</p>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       LOGIN
+  ══════════════════════════════════════ -->
+        <div class="scr" id="login">
+            <div class="sa" style="padding:0 20px 40px">
+                <div style="height:calc(var(--st) + 10px)"></div>
+                <div style="padding:16px 0 26px">
+                    <button onclick="go('welcome')" class="btn btn-g"
+                        style="padding:10px 14px;font-size:13px;border-radius:14px;gap:5px">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                        Back
+                    </button>
+                </div>
+                <div class="au">
+                    <div
+                        style="font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--t);margin-bottom:5px">
+                        Welcome Back</div>
+                    <div style="font-size:14px;color:var(--t2);margin-bottom:24px">Choose your account ya email se login
+                        karo</div>
+                </div>
+                <!-- Saved accounts -->
+                <div id="eu-s" style="display:none;margin-bottom:20px" class="au1">
+                    <div class="section-label">Saved Accounts</div>
+                    <div class="card" style="padding:0 16px" id="eu-l"></div>
+                    <div class="divider-text" style="margin:18px 0"><span>or add new account</span></div>
+                </div>
+                <div class="au2">
+                    <!-- Google sign-in button -->
+                    <button onclick="openGP()"
+                        style="background:white;color:#1f1f1f;border:none;border-radius:16px;padding:14px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;width:100%;font-size:15px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,0.25);margin-bottom:12px;transition:transform .15s;font-family:'Plus Jakarta Sans',sans-serif"
+                        onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'"
+                        ontouchend="this.style.transform='scale(1)'">
+                        <svg width="22" height="22" viewBox="0 0 48 48">
+                            <path fill="#EA4335"
+                                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                            <path fill="#4285F4"
+                                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                            <path fill="#FBBC05"
+                                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                            <path fill="#34A853"
+                                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                        </svg>
+                        Sign in with Google
+                    </button>
+                    <div class="divider-text" style="margin-bottom:12px"><span>or email se</span></div>
+                    <input class="inp" id="le" type="email" placeholder="your@email.com" style="margin-bottom:10px"
+                        onkeydown="if(event.key==='Enter') emailL()" />
+                    <button class="btn btn-g" style="width:100%;padding:14px;margin-bottom:20px"
+                        onclick="emailL()">Continue with Email →</button>
+                    <div
+                        style="background:var(--g3);border:1px solid rgba(16,185,129,0.18);border-radius:14px;padding:12px 15px;font-size:12px;color:var(--t3);line-height:1.7">
+                        🔐 <strong style="color:var(--g)">Privacy First:</strong> Tera data sirf tere device pe. Koi
+                        server nahi, koi cloud nahi.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       GOOGLE PICKER MODAL
+  ══════════════════════════════════════ -->
+        <div id="gmv">
+            <div id="gmb">
+                <div style="background:white;padding:28px 24px 0">
+                    <div style="text-align:center;margin-bottom:22px">
+                        <svg height="26" viewBox="0 0 74 24" style="margin-bottom:14px">
+                            <path fill="#4285F4"
+                                d="M9.24 8.19v2.46h5.88c-.18 1.38-.64 2.34-1.44 3.06-.85.77-2.17 1.62-4.44 1.62-3.53 0-6.29-2.85-6.29-6.38S5.71 2.57 9.24 2.57c1.93 0 3.28.76 4.29 1.71l1.73-1.73C13.73.86 11.96 0 9.24 0 4.27 0 .16 3.97.16 8.95s4.11 8.95 9.08 8.95c2.67 0 4.68-.87 6.26-2.52 1.62-1.62 2.12-3.89 2.12-5.73 0-.57-.04-1.1-.13-1.46H9.24z" />
+                            <path fill="#EA4335"
+                                d="M25 6.19c-3.21 0-5.83 2.44-5.83 5.81 0 3.34 2.62 5.81 5.83 5.81s5.83-2.46 5.83-5.81c0-3.37-2.62-5.81-5.83-5.81zm0 9.33c-1.76 0-3.28-1.45-3.28-3.52s1.52-3.52 3.28-3.52 3.28 1.45 3.28 3.52-1.52 3.52-3.28 3.52z" />
+                            <path fill="#FBBC05"
+                                d="M53.58 7.49h-.09c-.57-.68-1.67-1.3-3.06-1.3C47.53 6.19 45 8.72 45 12s2.53 5.81 5.43 5.81c1.39 0 2.49-.62 3.06-1.32h.09v.83c0 2.22-1.19 3.41-3.1 3.41-1.56 0-2.53-1.13-2.93-2.08l-2.23.93c.64 1.54 2.33 3.45 5.16 3.45 3 0 5.54-1.76 5.54-6.05V6.49h-2.44v1zm-2.93 8.03c-1.76 0-3.1-1.5-3.1-3.52s1.34-3.52 3.1-3.52c1.73 0 3.1 1.5 3.1 3.52 0 2-.37 3.52-3.1 3.52z" />
+                            <path fill="#34A853"
+                                d="M38 6.19c-3.21 0-5.83 2.44-5.83 5.81 0 3.34 2.62 5.81 5.83 5.81s5.83-2.46 5.83-5.81c0-3.37-2.62-5.81-5.83-5.81zm0 9.33c-1.76 0-3.28-1.45-3.28-3.52s1.52-3.52 3.28-3.52 3.28 1.45 3.28 3.52-1.52 3.52-3.28 3.52z" />
+                            <path fill="#4285F4" d="M58.93 1h2.55v16.76h-2.55z" />
+                            <path fill="#EA4335"
+                                d="M67.72 15.52l-1.97 1.33c.59.96 1.53 1.96 3.37 1.96 2.25 0 3.77-1.43 3.77-3.39 0-1.97-1.2-2.87-3.08-3.57l-.94-.4c-.97-.41-1.46-.83-1.46-1.6 0-.67.57-1.19 1.43-1.19.82 0 1.37.36 1.85 1.19l1.87-1.22c-.73-1.28-1.84-1.93-3.49-1.93-2.07 0-3.51 1.32-3.51 3.12 0 1.76 1.02 2.72 3.13 3.52l.79.33c1.15.47 1.58.92 1.58 1.73 0 .86-.75 1.4-1.83 1.4-1.14-.01-1.8-.55-2.51-1.29z" />
+                        </svg>
+                        <div style="font-size:22px;font-weight:700;color:#202124;letter-spacing:-.3px">Sign in</div>
+                        <div style="font-size:14px;color:#5f6368;margin-top:3px">to continue to
+                            <strong>PaisaTracker</strong>
+                        </div>
+                    </div>
+                    <div id="gpa" style="border-top:1px solid #e8eaed"></div>
+                    <div id="gpad" style="border-top:1px solid #e8eaed">
+                        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;cursor:pointer"
+                            onclick="showGEI()">
+                            <div
+                                style="width:40px;height:40px;border-radius:50%;background:#f1f3f4;display:flex;align-items:center;justify-content:center">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5f6368"
+                                    stroke-width="2">
+                                    <path d="M12 5v14M5 12h14" />
+                                </svg>
+                            </div>
+                            <span style="font-size:14px;color:#202124;font-weight:500">Use another account</span>
+                        </div>
+                    </div>
+                    <div id="gpef" style="display:none;padding-bottom:16px">
+                        <div style="font-size:14px;color:#5f6368;margin-bottom:10px">Enter your email address</div>
+                        <input id="gpei" type="email" placeholder="Email or phone"
+                            style="width:100%;padding:12px 14px;border:1.5px solid #dadce0;border-radius:12px;font-size:15px;color:#202124;outline:none;font-family:'Plus Jakarta Sans',sans-serif;transition:border-color .2s"
+                            onfocus="this.style.borderColor='#1a73e8'" onblur="this.style.borderColor='#dadce0'"
+                            onkeydown="if(event.key==='Enter')confGE()" />
+                        <div style="font-size:11px;color:#9aa0a6;margin-top:8px;line-height:1.6">ℹ️ Ye app locally tera
+                            email ID save karke private account banata hai.</div>
+                        <button onclick="confGE()"
+                            style="width:100%;margin-top:12px;background:linear-gradient(135deg,#1a73e8,#1557b0);color:white;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Next
+                            →</button>
+                    </div>
+                </div>
+                <div
+                    style="background:#f8f9fa;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e8eaed">
+                    <button onclick="closeGP()"
+                        style="background:none;border:none;color:#5f6368;font-size:13px;cursor:pointer;font-weight:500">Cancel</button>
+                    <div style="display:flex;gap:14px">
+                        <a
+                            style="color:#1a73e8;font-size:12px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Privacy</a>
+                        <a
+                            style="color:#1a73e8;font-size:12px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Terms</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       PROFILE SETUP
+  ══════════════════════════════════════ -->
+        <div class="scr" id="ps">
+            <div class="sa" style="padding:0 20px 40px">
+                <div style="height:calc(var(--st) + 20px)"></div>
+                <div
+                    style="display:inline-flex;align-items:center;gap:8px;background:var(--g3);border:1px solid rgba(16,185,129,0.2);border-radius:50px;padding:5px 14px;margin-bottom:20px">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="2.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    <span style="font-size:11px;color:var(--g);font-weight:700">Step 1 of 3 — Profile</span>
+                </div>
+                <div style="font-family:'Sora',sans-serif;font-size:24px;font-weight:800;color:var(--t);margin-bottom:4px"
+                    class="au">Setup Profile</div>
+                <div style="font-size:14px;color:var(--t2);margin-bottom:22px" class="au1">Naam aur avatar set karo
+                </div>
+                <div style="text-align:center;margin-bottom:22px" class="au2">
+                    <div id="psad" style="font-size:72px;line-height:1;margin-bottom:10px">😊</div>
+                    <div class="avg" id="psag" style="justify-content:center;max-width:300px;margin:0 auto"></div>
+                </div>
+                <div class="au3" style="margin-bottom:11px">
+                    <label class="inp-label">Full Name *</label>
+                    <input class="inp" id="psn" placeholder="Apna naam" type="text" />
+                </div>
+                <div class="au4" style="margin-bottom:18px">
+                    <label class="inp-label">Mobile (optional)</label>
+                    <input class="inp" id="psp" placeholder="+91 98765 43210" type="tel" pattern="[6-9][0-9]{9}"
+                        maxlength="13" oninput="this.value=this.value.replace(/[^0-9+\s]/g,'')"
+                        title="Enter a valid 10-digit Indian mobile number" />
+                    <div style="font-size:10px;color:var(--t3);margin-top:3px">Start with 6-9, 10 digits (e.g.
+                        9876543210)</div>
+                </div>
+                <div style="background:var(--g3);border:1px solid rgba(16,185,129,0.18);border-radius:14px;padding:12px 15px;margin-bottom:20px;font-size:12px;color:var(--t3);line-height:1.7"
+                    class="au4">
+                    ✓ Email: <strong id="pse" style="color:var(--g)"></strong><br />
+                    ✓ Data sirf tere device pe encrypted rehega
+                </div>
+                <button class="btn btn-p" style="width:100%;padding:16px;font-size:15px;border-radius:18px"
+                    onclick="finishPs()">Continue to PIN Setup →</button>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       PIN SETUP
+  ══════════════════════════════════════ -->
+        <div class="scr" id="pin-s">
+            <div
+                style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;gap:32px">
+                <div style="text-align:center" class="au">
+                    <div style="font-size:54px;margin-bottom:14px">🔐</div>
+                    <div id="pinb" class="setup-badge">Step 2 of 3 — Create PIN</div>
+                </div>
+                <div id="pinp" class="au1"
+                    style="display:flex;flex-direction:column;align-items:center;gap:26px;width:100%"></div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       BIOMETRIC SETUP
+  ══════════════════════════════════════ -->
+        <div class="scr" id="bio-s">
+            <div
+                style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;gap:22px">
+                <div class="setup-badge au">Step 3 of 3 — Biometric</div>
+                <div id="bic" class="anim-float au1" style="font-size:88px">👆</div>
+                <div style="text-align:center" class="au2">
+                    <div id="bit"
+                        style="font-family:'Sora',sans-serif;font-size:24px;font-weight:700;color:var(--t);margin-bottom:8px">
+                        Biometric Login</div>
+                    <div id="bid" style="font-size:14px;color:var(--t2);line-height:1.7;max-width:280px">Face ID ya
+                        Fingerprint se quick &amp; secure login</div>
+                </div>
+                <div id="bia" class="au3"
+                    style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:290px">
+                    <button class="btn btn-p" style="width:100%;padding:16px" onclick="setupBio()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+                            <path
+                                d="M12 10a2 2 0 00-2 2v.01M10 14v1a2 2 0 002 2M8 12a4 4 0 108 0v1M6 12a6 6 0 1012 0v1M4 12a8 8 0 1016 0" />
+                        </svg>
+                        Enable Fingerprint / Face ID
+                    </button>
+                    <button class="btn btn-g" style="width:100%;padding:14px" onclick="skipBio()">Skip, PIN
+                        only</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       LOCK SCREEN
+  ══════════════════════════════════════ -->
+        <div class="scr" id="lock">
+            <div class="lock-gradient"></div>
+            <div
+                style="flex:1;display:flex;flex-direction:column;align-items:center;padding:calc(var(--st)+40px) 32px calc(var(--sb)+28px);position:relative;z-index:1;overflow-y:auto;gap:0">
+                <!-- User info -->
+                <div style="text-align:center;flex-shrink:0;margin-bottom:28px">
+                    <div id="lk-clock" class="lock-clock">--:--</div>
+                    <div id="lk-date" style="font-size:13px;color:var(--t3);margin-bottom:16px;font-weight:500">--</div>
+                    <div id="lkav"
+                        style="font-size:56px;margin-bottom:8px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.4))">😊</div>
+                    <div id="lknm" style="font-size:20px;font-weight:700;color:var(--t)">User</div>
+                    <div id="lkem" style="font-size:12px;color:var(--t3);margin-top:3px"></div>
+                    <div style="display:inline-flex;align-items:center;gap:6px;margin-top:10px"
+                        class="badge badge-green">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--g)"
+                            stroke-width="2.5">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0110 0v4" />
+                        </svg>
+                        App Locked
+                    </div>
+                </div>
+                <!-- PIN pad -->
+                <div id="lkp"
+                    style="display:flex;flex-direction:column;align-items:center;gap:22px;width:100%;flex-shrink:0;margin-bottom:24px">
+                </div>
+                <!-- Biometric + Switch -->
+                <div
+                    style="display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;flex-shrink:0;padding-top:4px">
+                    <button id="biob"
+                        style="display:none;background:var(--gl2);border:1px solid var(--bd2);border-radius:16px;padding:12px 24px;cursor:pointer;color:var(--t2);font-size:14px;font-weight:600;align-items:center;gap:8px"
+                        onclick="bioL()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path
+                                d="M12 10a2 2 0 00-2 2v.01M10 14v1a2 2 0 002 2M8 12a4 4 0 108 0v1M6 12a6 6 0 1012 0v1M4 12a8 8 0 1016 0" />
+                        </svg>
+                        Use Biometric
+                    </button>
+                    <button onclick="swAcc()"
+                        style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:13px;font-weight:500;padding:8px 16px">Switch
+                        Account</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       MAIN APP
+  ══════════════════════════════════════ -->
+        <div class="scr" id="main">
+            <div class="sa" id="ms">
+                <div id="pg-dashboard" class="pg" style="display:none"></div>
+                <div id="pg-transactions" class="pg" style="display:none"></div>
+                <div id="pg-accounts" class="pg" style="display:none"></div>
+                <div id="pg-goals" class="pg" style="display:none"></div>
+                <div id="pg-reports" class="pg" style="display:none"></div>
+                <div id="pg-profile" class="pg" style="display:none"></div>
+            </div>
+            <nav id="bnav">
+                <button class="nb on" data-t="dashboard" onclick="tabTo('dashboard')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2zM9 22V12h6v10" />
+                    </svg>
+                    <span>Home</span>
+                </button>
+                <button class="nb" data-t="transactions" onclick="tabTo('transactions')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4" />
+                    </svg>
+                    <span>Txns</span>
+                </button>
+                <button class="nb" data-t="accounts" onclick="tabTo('accounts')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path
+                            d="M21 12V7a2 2 0 00-2-2H3a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2v-5M16 12a2 2 0 100 4 2 2 0 000-4z" />
+                    </svg>
+                    <span>Wallet</span>
+                </button>
+                <button class="nb" data-t="goals" onclick="tabTo('goals')" id="nb-g" style="position:relative">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="6" />
+                        <circle cx="12" cy="12" r="2" />
+                    </svg>
+                    <span>Goals</span>
+                </button>
+                <button class="nb" data-t="reports" onclick="tabTo('reports')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M18 20V10M12 20V4M6 20v-6" />
+                    </svg>
+                    <span>Reports</span>
+                </button>
+                <button class="nb" data-t="profile" onclick="tabTo('profile')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" />
+                    </svg>
+                    <span>Profile</span>
+                </button>
+            </nav>
+            <button id="fab" onclick="openAddTx()">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       BOTTOM SHEETS
+  ══════════════════════════════════════ -->
+        <div class="ov" id="ov-add-tx" onclick="closeBg(event,'add-tx')">
+            <div class="sh">
+                <div class="sh-h"></div>
+                <div id="sh-add-tx"></div>
+            </div>
+        </div>
+        <div class="ov" id="ov-cat-mgr" onclick="closeBg(event,'cat-mgr')">
+            <div class="sh">
+                <div class="sh-h"></div>
+                <div id="sh-cat-mgr"></div>
+            </div>
+        </div>
+        <div class="ov" id="ov-udhaar-share" onclick="closeBg(event,'udhaar-share')">
+            <div class="sh">
+                <div class="sh-h"></div>
+                <div id="sh-udhaar-share"></div>
+            </div>
+        </div>
+        <div class="ov" id="ov-change-pin" onclick="closeBg(event,'change-pin')">
+            <div class="sh">
+                <div class="sh-h"></div>
+                <div id="sh-change-pin"></div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+       GLOBAL UI ELEMENTS
+  ══════════════════════════════════════ -->
+        <!-- Custom Modal -->
+        <div id="modal-overlay">
+            <div id="modal-box"></div>
+        </div>
+
+        <!-- Toast -->
+        <div id="toast"></div>
+
+        <!-- Install banner -->
+        <div id="ib">
+            <span style="font-size:22px">📲</span>
+            <div style="flex:1">
+                <div style="font-size:13px;font-weight:700;color:white">Install PaisaTracker</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.75)">Add to Home Screen for best experience</div>
+            </div>
+            <button
+                style="background:rgba(255,255,255,0.22);border:none;border-radius:10px;padding:8px 14px;cursor:pointer;color:white;font-weight:700;font-size:13px"
+                onclick="instPWA()">Install</button>
+            <button
+                style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.6);font-size:20px;line-height:1;padding:0 4px"
+                onclick="document.getElementById('ib').classList.remove('show')">×</button>
+        </div>
+
+        <!-- Offline banner -->
+        <div id="offline-banner">📡 You're offline — your data is safe and synced when you reconnect</div>
+
+    </div><!-- /#app -->
+
+    <!-- ══════════════════════════════════════
+     JAVASCRIPT — load order matters!
+══════════════════════════════════════ -->
+    <!-- 1. Core utilities -->
+    <script src="./js/db.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/validate.js"></script>
+    <script src="./js/state.js"></script>
+    <script src="./js/toast.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/router.js"></script>
+    <script src="./js/charts.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script src="./js/security.js"></script>
+    <script src="./js/auth.js"></script>
+
+    <!-- 2. Screens -->
+    <script src="./js/screens/splash.js"></script>
+    <script src="./js/screens/profile-setup.js"></script>
+    <script src="./js/screens/lock.js"></script>
+    <script src="./js/screens/main.js"></script>
+
+    <!-- 3. Tabs — transactions FIRST so txRow is defined for dashboard -->
+    <script src="./js/tabs/transactions.js"></script>
+    <script src="./js/tabs/dashboard.js"></script>
+    <script src="./js/tabs/accounts.js"></script>
+    <script src="./js/tabs/goals.js"></script>
+    <script src="./js/tabs/reports.js"></script>
+    <script src="./js/tabs/profile.js"></script>
+
+    <!-- 4. Sheets -->
+    <script src="./js/sheets/add-transaction.js"></script>
+    <script src="./js/sheets/udhaar-share.js"></script>
+    <script src="./js/sheets/category-manager.js"></script>
+
+    <!-- 5. Init -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            PWA.init();
+            Router.setupSwipe();
+            Security.setupInactivityListeners();
+            SplashScreen.init();
+
+            // Haptic on primary buttons
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.btn-p, .pk, .nb')) hap('light');
+            });
+        });
+
+        // Init notifications after user logs in
+        window.onUserReady = function () {
+            Notifs.init();
+        };
+    </script>
+
+</body>
+
+</html>

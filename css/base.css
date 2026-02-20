@@ -1,0 +1,272 @@
+/* =========================================================
+   PaisaTracker — Base Styles & Reset
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+html,
+body {
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--bg);
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--t);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background var(--dur-med) var(--ease-smooth),
+        color var(--dur-med) var(--ease-smooth);
+}
+
+input,
+select,
+button,
+textarea {
+    font-family: inherit;
+    outline: none;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ── App Root ──────────────────────────────────────────── */
+#app {
+    position: relative;
+    height: 100dvh;
+    max-width: 430px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: var(--bg);
+    isolation: isolate;
+}
+
+/* Ambient gradient background — subtle hacker-green glow */
+#app::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 80% 50% at 20% -5%, rgba(57, 255, 20, 0.07), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 85% 110%, rgba(57, 255, 20, 0.04), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 50% 55%, rgba(0, 212, 161, 0.02), transparent 60%);
+    transition: opacity var(--dur-med) var(--ease-smooth);
+}
+
+/* Desktop side decoration */
+@media (min-width: 430px) {
+    body {
+        background: #060606;
+    }
+
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+            radial-gradient(ellipse 60% 80% at 15% 50%, rgba(57, 255, 20, 0.04), transparent),
+            radial-gradient(ellipse 60% 80% at 85% 50%, rgba(57, 255, 20, 0.02), transparent);
+        pointer-events: none;
+    }
+}
+
+#app>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Screen ────────────────────────────────────────────── */
+.scr {
+    position: absolute !important;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.32s var(--ease-smooth);
+}
+
+.scr.on {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+/* Scrollable area */
+.sa {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+.pg {
+    padding: 0 16px calc(var(--nh) + var(--sb) + 28px);
+}
+
+/* ── Typography ────────────────────────────────────────── */
+.font-display {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-body {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--brand-green), var(--brand-teal), var(--brand-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--t);
+    margin-bottom: 12px;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--t3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+/* ── Utility ───────────────────────────────────────────── */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.gap-12 {
+    gap: 12px;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.safe-top {
+    height: calc(var(--st) + 10px);
+}
+
+.safe-bottom {
+    height: calc(var(--sb) + 8px);
+}
+
+/* Horizontal scroll strip */
+.hscroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
+}
+
+.hscroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background: var(--bd);
+}
+
+.divider-text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--t3);
+    font-size: 12px;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--bd);
+}

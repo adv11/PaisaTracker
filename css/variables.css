@@ -1,0 +1,118 @@
+/* =========================================================
+   PaisaTracker — Design Tokens  (Dark Only — v6)
+   Palette: Rich dark slate (#0d1117) — GitHub-proven readability
+   Accent:  Electric blue (#58a6ff) | Income: #3fb950 | Expense: #f85149
+   ========================================================= */
+
+:root {
+  /* ── Brand / Semantic ────────────────────────────────── */
+  --brand-green: #3fb950;
+  /* income green */
+  --brand-blue: #58a6ff;
+  /* accent / investment blue */
+  --brand-red: #f85149;
+  /* expense red */
+  --brand-amber: #d29922;
+  /* udhaar amber */
+  --brand-purple: #bc8cff;
+  /* investment purple */
+
+  /* ── Backgrounds ─────────────────────────────────────── */
+  --bg: #0d1117;
+  /* deepest — root bg */
+  --bg2: #161b22;
+  /* section bg */
+  --bg3: #21262d;
+  /* card bg */
+  --bg4: #2d333b;
+  /* elevated surface */
+
+  /* ── Glass Layers ────────────────────────────────────── */
+  --gl: rgba(255, 255, 255, 0.04);
+  --gl2: rgba(255, 255, 255, 0.07);
+  --gl3: rgba(255, 255, 255, 0.11);
+  --gl4: rgba(255, 255, 255, 0.17);
+
+  /* ── Borders ─────────────────────────────────────────── */
+  --bd: rgba(48, 54, 61, 1.00);
+  /* solid dark border */
+  --bd2: rgba(72, 80, 90, 1.00);
+  /* slightly lighter */
+  --bd3: rgba(110, 118, 129, 0.80);
+  /* highlighted border */
+
+  /* ── Text ────────────────────────────────────────────── */
+  --t: #e6edf3;
+  /* primary — bright near-white */
+  --t2: #8b949e;
+  /* secondary — slate grey */
+  --t3: #58626a;
+  /* muted — dark grey */
+  --t4: #2d333b;
+  /* very muted / disabled */
+
+  /* ── Semantic Colours ────────────────────────────────── */
+  --g: #3fb950;
+  /* income / positive */
+  --g2: #238636;
+  --g3: rgba(63, 185, 80, 0.12);
+  --g4: rgba(63, 185, 80, 0.06);
+
+  --r: #f85149;
+  /* expense / danger */
+  --r2: rgba(248, 81, 73, 0.14);
+
+  --b: #58a6ff;
+  /* investment / info */
+  --b2: rgba(88, 166, 255, 0.12);
+
+  --y: #d29922;
+  /* udhaar / warning */
+  --y2: rgba(210, 153, 34, 0.14);
+
+  /* ── Blur ────────────────────────────────────────────── */
+  --blur: blur(20px) saturate(150%);
+  --blur-sm: blur(10px) saturate(130%);
+  --blur-xs: blur(5px) saturate(115%);
+
+  /* ── Shadows ─────────────────────────────────────────── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.70);
+  --shadow-green: 0 4px 18px rgba(63, 185, 80, 0.30);
+  --shadow-blue: 0 4px 18px rgba(88, 166, 255, 0.25);
+  --shadow-card: 0 0 0 1px var(--bd), 0 4px 16px rgba(0, 0, 0, 0.40);
+
+  /* ── Border Radius ───────────────────────────────────── */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-xl: 24px;
+  --r-2xl: 30px;
+  --r-pill: 100px;
+  --r-card: 16px;
+
+  /* ── Spacing ─────────────────────────────────────────── */
+  --sp-xs: 6px;
+  --sp-sm: 10px;
+  --sp-md: 16px;
+  --sp-lg: 24px;
+  --sp-xl: 32px;
+
+  /* ── Navigation ──────────────────────────────────────── */
+  --nh: 72px;
+  --sb: env(safe-area-inset-bottom, 0px);
+  --st: env(safe-area-inset-top, 0px);
+
+  /* ── Motion ──────────────────────────────────────────── */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --dur-fast: 0.14s;
+  --dur-med: 0.26s;
+  --dur-slow: 0.42s;
+}
+
+/* No light theme — dark only */

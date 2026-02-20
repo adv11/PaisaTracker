@@ -1,0 +1,827 @@
+/* =========================================================
+   PaisaTracker — Reusable UI Components
+   ========================================================= */
+
+/* ── Cards ─────────────────────────────────────────────── */
+.card {
+    background: var(--gl);
+    border: 1px solid var(--bd);
+    border-radius: var(--r-card);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+}
+
+.card2 {
+    background: var(--gl2);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r-md);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+}
+
+.card-glow {
+    background: linear-gradient(135deg, rgba(15, 30, 65, 0.92), rgba(10, 18, 42, 0.95));
+    border: 1px solid rgba(16, 185, 129, 0.14);
+    border-radius: var(--r-xl);
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.3);
+}
+
+.card-soft {
+    background: var(--gl2);
+    border: 1px solid var(--bd);
+    border-radius: var(--r-lg);
+    padding: 16px;
+}
+
+/* ── Inputs ────────────────────────────────────────────── */
+.inp {
+    background: var(--gl);
+    border: 1.5px solid var(--bd);
+    color: var(--t);
+    border-radius: var(--r-sm);
+    padding: 13px 16px;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 500;
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+    transition: border-color var(--dur-med) var(--ease-smooth),
+        box-shadow var(--dur-med) var(--ease-smooth);
+}
+
+.inp:focus {
+    border-color: var(--g);
+    box-shadow: 0 0 0 3px var(--g3);
+}
+
+.inp::placeholder {
+    color: var(--t3);
+    font-weight: 400;
+}
+
+select.inp option {
+    background: #0f172a;
+    color: var(--t);
+}
+
+/* Date & month inputs — hide native picker chrome, show clean text */
+input[type="date"].inp,
+input[type="month"].inp,
+input[type="time"].inp {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-right: 14px;
+    /* no room for native icon */
+}
+
+/* Remove the native calendar icon in webkit */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    opacity: 0.5;
+    cursor: pointer;
+    filter: invert(0.8);
+    width: 16px;
+    height: 16px;
+}
+
+/* Input label */
+.inp-label {
+    font-size: 10px;
+    color: var(--t3);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.btn {
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: var(--r-md);
+    padding: 14px 22px;
+    transition: transform var(--dur-fast) var(--ease-spring),
+        box-shadow var(--dur-med) var(--ease-smooth),
+        opacity var(--dur-fast) var(--ease-smooth);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.btn:active {
+    transform: scale(0.93);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Primary — green gradient */
+.btn-p {
+    background: linear-gradient(135deg, var(--brand-green), var(--brand-green-dark));
+    color: white;
+    box-shadow: var(--shadow-green);
+}
+
+.btn-p:hover {
+    box-shadow: 0 10px 32px rgba(16, 185, 129, 0.50);
+}
+
+.btn-p:active {
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.30);
+}
+
+/* Ghost — glass */
+.btn-g {
+    background: var(--gl2);
+    color: var(--t2);
+    border: 1.5px solid var(--bd2);
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+}
+
+/* Danger */
+.btn-r {
+    background: var(--r2);
+    color: var(--r);
+    border: 1px solid rgba(239, 68, 68, 0.22);
+}
+
+/* Indigo */
+.btn-b {
+    background: var(--b2);
+    color: var(--b);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+}
+
+/* Icon button */
+.btn-icon {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: var(--r-xs);
+    background: var(--gl2);
+    border: 1px solid var(--bd);
+    color: var(--t2);
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* ── Chips (filter pills) ──────────────────────────────── */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 15px;
+    border-radius: var(--r-pill);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all var(--dur-fast) var(--ease-smooth);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.chip-active {
+    background: var(--g);
+    color: white;
+}
+
+.chip-idle {
+    background: var(--gl2);
+    color: var(--t2);
+    border: 1px solid var(--bd);
+}
+
+/* ── Toggle Switch ─────────────────────────────────────── */
+.tgl {
+    width: 50px;
+    height: 28px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background var(--dur-med) var(--ease-smooth);
+    position: relative;
+    border: none;
+    flex-shrink: 0;
+}
+
+.tgl.on {
+    background: var(--g);
+}
+
+.tgl-k {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: white;
+    transition: left var(--dur-med) var(--ease-spring);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+.tgl.on .tgl-k {
+    left: 25px;
+}
+
+/* ── Progress Bar ──────────────────────────────────────── */
+.pb {
+    height: 7px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.pbf {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.9s var(--ease-smooth);
+}
+
+/* ── Navigation Bar ────────────────────────────────────── */
+#bnav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--nh) + var(--sb));
+    background: rgba(5, 8, 18, 0.90);
+    border-top: 1px solid var(--bd);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding-top: 10px;
+    padding-bottom: var(--sb);
+    z-index: 100;
+}
+
+.nb {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 10px;
+    border-radius: var(--r-sm);
+    min-width: 52px;
+    transition: all var(--dur-med) var(--ease-spring);
+    color: var(--t3);
+    position: relative;
+}
+
+.nb.on {
+    color: var(--g);
+}
+
+.nb svg {
+    width: 22px;
+    height: 22px;
+    transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.nb.on svg {
+    transform: scale(1.18) translateY(-1px);
+}
+
+.nb span {
+    font-size: 10px;
+    font-weight: 700;
+    transition: all var(--dur-med) var(--ease-smooth);
+    letter-spacing: 0.2px;
+}
+
+.nb.on span {
+    color: var(--g);
+    font-weight: 800;
+}
+
+/* Active dot */
+.nb.on::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--g);
+    animation: dotAppear 0.3s var(--ease-spring);
+}
+
+/* Badge */
+.nb-bdg {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    background: var(--r);
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+}
+
+/* ── FAB ───────────────────────────────────────────────── */
+#fab {
+    position: fixed;
+    bottom: calc(var(--nh) + var(--sb) + 18px);
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(34, 197, 94, 0.40);
+    z-index: 99;
+    transition: transform var(--dur-med) var(--ease-spring),
+        box-shadow var(--dur-med) var(--ease-smooth);
+}
+#fab:active {
+    transform: scale(0.88);
+    box-shadow: 0 2px 12px rgba(34,197,94,0.30);
+}
+
+/* Universal bottom padding so FAB never hides last card */
+.sa {
+    padding-bottom: calc(var(--nh) + var(--sb) + 80px) !important;
+}
+
+/* ── Bottom Sheet Overlay ──────────────────────────────── */
+.ov {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.ov.open {
+    display: flex;
+}
+
+.sh {
+    background: rgba(8, 10, 18, 0.97);
+    border: 1px solid var(--bd2);
+    border-radius: 28px 28px 0 0;
+    width: 100%;
+    max-width: 430px;
+    max-height: 94dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px calc(28px + var(--sb));
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+        box-shadow 0.38s var(--ease-smooth);
+}
+
+.ov.open .sh {
+    transform: translateY(0);
+    box-shadow: 0 -24px 64px rgba(0, 0, 0, 0.48);
+}
+
+.sh-h {
+    width: 38px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 2px;
+    margin: 14px auto 20px;
+    cursor: grab;
+}
+
+/* Universal sheet close button — matches udhaar popup X */
+.sh-close {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    line-height: 1;
+    padding: 0;
+    transition: background var(--dur-fast) var(--ease-smooth),
+        transform var(--dur-fast) var(--ease-spring);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.sh-close:active {
+    background: rgba(255, 255, 255, 0.14);
+    transform: scale(0.90);
+}
+
+/* ── Toast ─────────────────────────────────────────────── */
+#toast {
+    position: fixed;
+    top: calc(var(--st) + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    z-index: 1000;
+    white-space: nowrap;
+    padding: 11px 20px;
+    border-radius: var(--r-pill);
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    box-shadow: var(--shadow-lg);
+    pointer-events: none;
+    max-width: calc(100vw - 32px);
+    white-space: normal;
+    text-align: center;
+    transition: transform 0.36s var(--ease-spring), opacity 0.3s var(--ease-smooth);
+    opacity: 0;
+}
+
+#toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* ── Custom Modal ──────────────────────────────────────── */
+#modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#modal-overlay.open {
+    display: flex;
+}
+
+#modal-box {
+    background: var(--bg3);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r-2xl);
+    width: 100%;
+    max-width: 340px;
+    padding: 28px 24px 22px;
+    animation: popIn 0.32s var(--ease-spring) both;
+    box-shadow: var(--shadow-lg);
+}
+
+/* ── PIN Pad ───────────────────────────────────────────── */
+.pdots {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+}
+
+.pd {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    transition: all var(--dur-med) var(--ease-spring);
+}
+
+.pd.on {
+    background: var(--g);
+    border-color: var(--g);
+    transform: scale(1.28);
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.55);
+}
+
+.pgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 270px;
+    margin: 0 auto;
+}
+
+.pk {
+    background: var(--gl2);
+    border: 1px solid var(--bd);
+    border-radius: 50%;
+    width: 76px;
+    height: 76px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--t);
+    cursor: pointer;
+    transition: all var(--dur-fast) var(--ease-spring);
+    font-family: 'Sora', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pk:active {
+    background: var(--g);
+    color: white;
+    border-color: var(--g);
+    transform: scale(0.86);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.5);
+}
+
+/* ── Account card scroll ───────────────────────────────── */
+.acd {
+    min-width: 155px;
+    flex-shrink: 0;
+    border-radius: var(--r-xl);
+    padding: 18px;
+    scroll-snap-align: start;
+    transition: transform var(--dur-fast) var(--ease-smooth);
+}
+
+.acd:active {
+    transform: scale(0.94);
+}
+
+/* ── List row ──────────────────────────────────────────── */
+.lr {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--bd);
+}
+
+.lr:last-child {
+    border-bottom: none;
+}
+
+/* ── Avatar / emoji grid ───────────────────────────────── */
+.avg {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.avo {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--r-sm);
+    background: var(--gl);
+    border: 2px solid var(--bd);
+    font-size: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--dur-med) var(--ease-spring);
+}
+
+.avo.sel {
+    border-color: var(--g);
+    background: var(--g3);
+    transform: scale(1.12);
+}
+
+/* ── Grid helpers ──────────────────────────────────────── */
+.g2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.g3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+}
+
+.g4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+}
+
+.gc2 {
+    grid-column: 1 / -1;
+}
+
+.gc3 {
+    grid-column: 1 / -1;
+}
+
+/* ── PWA install banner ────────────────────────────────── */
+#ib {
+    position: fixed;
+    bottom: calc(var(--nh) + var(--sb) + 12px);
+    left: 12px;
+    right: 12px;
+    max-width: 406px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.91), rgba(99, 102, 241, 0.91));
+    border-radius: var(--r-md);
+    padding: 12px 16px;
+    z-index: 80;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 12px 32px rgba(16, 185, 129, 0.28);
+    backdrop-filter: var(--blur-sm);
+    animation: slideUp 0.4s var(--ease-spring) both;
+}
+
+#ib.show {
+    display: flex;
+}
+
+/* ── Offline banner ────────────────────────────────────── */
+#offline-banner {
+    position: fixed;
+    top: var(--st);
+    left: 0;
+    right: 0;
+    background: var(--y2);
+    border-bottom: 1px solid var(--y);
+    color: var(--y);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px;
+    z-index: 999;
+    display: none;
+    animation: slideDown 0.3s var(--ease-spring);
+}
+
+#offline-banner.show {
+    display: block;
+}
+
+/* ── Spending meter (circular) ─────────────────────────── */
+.spend-ring {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+}
+
+.spend-ring svg {
+    transform: rotate(-90deg);
+}
+
+.spend-ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Udhaar person card ────────────────────────────────── */
+.udhaar-card {
+    border-radius: var(--r-lg);
+    padding: 16px;
+    margin-bottom: 10px;
+    border: 1px solid var(--bd);
+    background: var(--gl);
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+}
+
+/* ── Status badge ──────────────────────────────────────── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.badge-green {
+    background: var(--g3);
+    color: var(--g);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-red {
+    background: var(--r2);
+    color: var(--r);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.badge-blue {
+    background: var(--b2);
+    color: var(--b);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.badge-amber {
+    background: var(--y2);
+    color: var(--y);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* ── Chart container ───────────────────────────────────── */
+.ch {
+    position: relative;
+    height: 196px;
+}
+
+/* ── Share action buttons ──────────────────────────────── */
+.share-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 8px;
+    border-radius: var(--r-sm);
+    border: 1.5px solid var(--bd2);
+    background: var(--gl2);
+    cursor: pointer;
+    transition: all var(--dur-fast) var(--ease-spring);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--t2);
+    min-width: 68px;
+    flex: 1;
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+}
+
+.share-btn:active {
+    transform: scale(0.91);
+    background: var(--gl3);
+}
+
+.share-btn .si {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* badge-idle */
+.badge-idle {
+    background: var(--gl2);
+    color: var(--t3);
+    border: 1px solid var(--bd);
+}
+/* ── Native month picker styling ──────────────────────── */
+input[type="month"].tx-month-inp,
+#tx-month-inp {
+    color-scheme: dark;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.7) brightness(1.2);
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+input[type="month"]::-webkit-datetime-edit {
+    color: var(--t);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+}
+
+/* Remove spinning arrows from number inputs */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] { -moz-appearance: textfield; }
+
+/* Hide scrollbar while keeping scroll functionality */
+[style*="overflow-x:auto"]::-webkit-scrollbar,
+[style*="overflow-x: auto"]::-webkit-scrollbar {
+    display: none;
+}
