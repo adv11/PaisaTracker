@@ -209,9 +209,9 @@ function rTxns(pg) {
                style="padding-left:40px"
                oninput="clearTimeout(_txSearchTimer);_txSearchTimer=setTimeout(()=>{S.txSearch=this.value;filterAndRenderList();},220)"/>
       </div>
-      <div style="flex-shrink:0">
+      <div style="flex-shrink:0;min-width:0">
         <input type="month" id="tx-month-inp" value="${S.txMonth}"
-               style="height:46px;min-width:145px;background:var(--gl2);border:1.5px solid var(--bd2);border-radius:12px;padding:0 14px;font-size:13px;font-weight:600;color:var(--t);cursor:pointer;-webkit-appearance:none;appearance:none;outline:none;color-scheme:dark"
+               style="height:46px;width:140px;max-width:140px;background:var(--gl2);border:1.5px solid var(--bd2);border-radius:12px;padding:0 12px;font-size:13px;font-weight:600;color:var(--t);cursor:pointer;-webkit-appearance:none;appearance:none;outline:none;color-scheme:dark"
                onchange="S.txMonth=this.value;filterAndRenderList();"/>
       </div>
     </div>

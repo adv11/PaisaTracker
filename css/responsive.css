@@ -27,6 +27,14 @@
     .card {
         padding: 14px !important;
     }
+    
+    /* Fix month picker on small screens */
+    input[type="month"] {
+        width: 130px !important;
+        max-width: 130px !important;
+        padding: 0 10px !important;
+        font-size: 12px !important;
+    }
 }
 
 /* Very small phones (< 320px) */
