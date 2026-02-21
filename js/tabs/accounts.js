@@ -31,7 +31,7 @@ function rAccs(pg) {
               <div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-top:2px">${a.type} · tap to view history 📜</div>
             </div>
             <div style="text-align:right">
-              <div style="font-size:24px;font-weight:900;color:${a.balance >= 0 ? 'var(--t)' : 'var(--r)'};font-family:'Sora',sans-serif;letter-spacing:-.5px">${INR(a.balance, true)}</div>
+              <div style="font-size:24px;font-weight:900;color:${a.balance >= 0 ? 'var(--t)' : 'var(--r)'};font-family:'Sora',sans-serif;letter-spacing:-.5px">${INR(a.balance)}</div>
             </div>
           </div>
           <div style="display:flex;border-top:1px solid ${a.color}18">

@@ -48,7 +48,7 @@ function renderCM() {
                     style="background:var(--gl2);border:1px solid var(--bd);border-radius:8px;padding:4px 8px;cursor:pointer;color:var(--t2);font-size:11px;font-weight:700"
                     id="cex-${safeId(cat.id)}">▼ Expand</button>
             <button onclick="delCat('${safeId(cat.id)}')"
-                    style="background:rgba(239,68,68,.12);border:none;border-radius:8px;padding:5px 8px;cursor:pointer;color:var(--r);font-size:14px"></button>
+                    style="background:rgba(239,68,68,.12);border:none;border-radius:8px;padding:5px 8px;cursor:pointer;color:var(--r);font-size:14px">🗑️</button>
           </div>
           <div id="cx-${safeId(cat.id)}" style="display:none;padding:0 14px 12px;border-top:1px solid var(--bd)">
             ${(cat.sub || []).length === 0 ? '<div style="font-size:12px;color:var(--t3);padding:8px 0">No subcategories yet</div>' : ''}

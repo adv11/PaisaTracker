@@ -25,6 +25,18 @@ const PWA = (() => {
     };
 
     const setupInstallPrompt = () => {
+        // Check if iOS and not in standalone mode
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator.standalone);
+        
+        if (isIOS && !isInStandaloneMode) {
+            // Show banner for iOS users
+            setTimeout(() => {
+                const banner = document.getElementById('ib');
+                if (banner) banner.classList.add('show');
+            }, 3000);
+        }
+        
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             _installPrompt = e;
@@ -41,6 +53,20 @@ const PWA = (() => {
     };
 
     const promptInstall = () => {
+        // Check if iOS
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator.standalone);
+        
+        if (isIOS && !isInStandaloneMode) {
+            // Show iOS-specific instructions
+            Modal.alert(
+                'Install PaisaTracker',
+                'To install on iOS:\n\n1. Tap the Share button (📤) in Safari\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add" to install',
+                { icon: '📱', btnText: 'Got it!' }
+            );
+            return;
+        }
+        
         if (_installPrompt) {
             _installPrompt.prompt();
             _installPrompt.userChoice.then(() => {

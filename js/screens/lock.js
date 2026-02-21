@@ -62,7 +62,20 @@ function finishSetup(user) {
 let _clockInterval = null;
 
 function showLock(user) {
-    document.getElementById('lkav').textContent = user.avatarEmoji || '😊';
+    const safePhoto = typeof user.avatarPhoto === 'string' && /^data:image\/(png|jpe?g|webp|gif);base64,/i.test(user.avatarPhoto)
+        ? user.avatarPhoto
+        : '';
+    
+    const avatarEl = document.getElementById('lkav');
+    if (avatarEl) {
+        if (safePhoto) {
+            avatarEl.innerHTML = '<img src="' + safePhoto + '" style="width:56px;height:56px;border-radius:50%;object-fit:cover;filter:drop-shadow(0 8px 24px rgba(0,0,0,.4))"/>';
+        } else {
+            avatarEl.textContent = user.avatarEmoji || '😊';
+            avatarEl.style.fontSize = '56px';
+        }
+    }
+    
     document.getElementById('lknm').textContent = user.name;
     document.getElementById('lkem').textContent = user.email;
 

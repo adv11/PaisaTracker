@@ -4,18 +4,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport"
-        content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+        content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PaisaTracker" />
-    <meta name="theme-color" content="#39FF14" />
+    <meta name="theme-color" content="#10b981" />
     <meta name="description" content="Smart personal finance tracker — budgets, goals, udhaar, and much more." />
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';" />
     <title>PaisaTracker — Smart Money Manager</title>
     <link rel="manifest" href="./manifest.json" />
-    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-192.svg" />
+    <link rel="icon" type="image/svg+xml" href="./icons/icon-192.svg" />
     <link rel="icon" type="image/png" href="./icons/icon-192.png" />
+    
+    <!-- iOS Splash Screens -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-startup-image" href="./icons/icon-512.svg" />
 
     <!-- Fonts: Space Grotesk (UI) + JetBrains Mono (numbers) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,6 +39,7 @@
     <link rel="stylesheet" href="./css/animations.css" />
     <link rel="stylesheet" href="./css/components.css" />
     <link rel="stylesheet" href="./css/screens.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
 </head>
 
 <body>
@@ -44,7 +51,7 @@
         <div class="scr on" id="splash">
             <canvas id="spc"></canvas>
             <div id="scc">
-                <div class="splash-logo">💎</div>
+                <div class="splash-logo"></div>
                 <div class="splash-title">PaisaTracker</div>
                 <div class="splash-tagline">Smart Money Manager</div>
                 <div class="splash-bar">
@@ -74,7 +81,7 @@
             <div class="sa" style="padding:0 20px 40px">
                 <div class="safe-top"></div>
                 <div class="auth-hero au">
-                    <div class="auth-logo">💎</div>
+                    <div class="auth-logo"></div>
                     <div class="auth-title">Apna Paisa,<br /><span class="text-gradient">Apna Control</span></div>
                     <div class="auth-subtitle">Smart budgeting · expense tracking · financial goals — sab ek jagah</div>
                 </div>

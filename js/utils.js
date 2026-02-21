@@ -50,13 +50,14 @@ const INR = (n, compact = false) => {
     if (Object.is(v, -0)) v = 0;  // fix -0 display bug
     const a = Math.abs(v);
     if (compact) {
+        // Only use compact format for very large numbers
         if (a >= 1e7) return `₹${(v / 1e7).toFixed(2).replace(/\.?0+$/, '')}Cr`;
         if (a >= 1e5) return `₹${(v / 1e5).toFixed(2).replace(/\.?0+$/, '')}L`;
-        if (a >= 1e3) return `₹${(v / 1e3).toFixed(0)}k`;
+        // Don't abbreviate thousands - show full amount
     }
     // Round to 2 decimal places to avoid floating-point noise
     const rounded = Math.round(v * 100) / 100;
-    return `₹${rounded.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
+    return `₹${rounded.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 };
 
 // ── Emoji Lists ──────────────────────────────────────────
